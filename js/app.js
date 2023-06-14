@@ -1,15 +1,3 @@
-// DOM Documents
-const userDay = document.getElementById('day').value
-const userMonth = document.getElementById('month').value
-const userYear = document.getElementById('year').value
-// const button = document.querySelector('#submit-button')
-
-const daysResult = document.querySelector('#daysResult')
-const monthsResult = document.querySelector('#monthsResult')
-const yearsResult = document.querySelector('#yearsResult')
-
-
-
 const audio = new Audio("https://www.fesliyanstudios.com/play-mp3/387");
 const button = document.getElementById('submit-button');
 
@@ -21,14 +9,22 @@ button.addEventListener("click", () => {
 
 function calculate() {
 
+        // DOM Documents
+    const userDay = document.getElementById('day').value
+    const userMonth = document.getElementById('month').value
+    const userYear = document.getElementById('year').value
+
+
+    const daysResult = document.querySelector('#daysResult')
+    const monthsResult = document.querySelector('#monthsResult')
+    const yearsResult = document.querySelector('#yearsResult')
+
     const userDayDate = new Date(userDay)
     const userMonthDate = new Date(userMonth)
     const userYearDate = new Date(userYear)
 
-    if (userDay == "" || userMonth == "" || userYear == "") {
+    if (userDay == null || userDay == "" ) {
         document.getElementById('message').innerHTML = "Choose a date please"
-
-        return false
     }
 
     else {
@@ -58,6 +54,8 @@ function calculate() {
             var monthAge = 12 + currentMonth - monthDate
         }
 
+        // let monthAge = currentMonth - monthDate
+
         //Get days
         if (currentDay >= dayDate) 
             var dateAge = currentDay - dayDate
@@ -78,13 +76,37 @@ function calculate() {
             days: dateAge
         }
 
-        if ( (age.years > 0) && (age.months > 0) && (age.days > 0) ) {
-            ageString = age.years 
-            // + " years, " + 
-            ageString = age.months  
-            // " months, and " + 
-            ageString = age.days
-        } 
+        if ( (age.years > 0) && (age.months > 0) && (age.days > 0) )
+            yearsAgeString = age.years, 
+            monthAgeString = age.months,
+            dayAgeString = age.days 
+        else if ( (age.years == 0) && (age.months == 0) && (age.days > 0) )  
+            yearsAgeString = age.years, 
+            monthAgeString = age.months,
+            dayAgeString = age.days 
+        // //when current month and date is same as birth date and month  
+        else if ( (age.years > 0) && (age.months == 0) && (age.days == 0) )  
+            yearsAgeString = age.years, 
+            monthAgeString = age.months,
+            dayAgeString = age.days 
+        else if ( (age.years > 0) && (age.months > 0) && (age.days == 0) )  
+            yearsAgeString = age.years, 
+            monthAgeString = age.months,
+            dayAgeString = age.days 
+        else if ( (age.years == 0) && (age.months > 0) && (age.days > 0) )  
+            yearsAgeString = age.years, 
+            monthAgeString = age.months,
+            dayAgeString = age.days 
+        else if ( (age.years > 0) && (age.months == 0) && (age.days > 0) )  
+            yearsAgeString = age.years, 
+            monthAgeString = age.months,
+            dayAgeString = age.days 
+        else if ( (age.years == 0) && (age.months > 0) && (age.days == 0) )  
+            yearsAgeString = age.years, 
+            monthAgeString = age.months,
+            dayAgeString = age.days 
+        //when current date is same as dob(date of birth)  
+        else ageString = "Welcome to Earth!"
 
 
         let dayResult = document.createElement('p')
@@ -92,9 +114,9 @@ function calculate() {
         let yearResult = document.createElement('p')
 
 
-        dayResult.innerHTML = ageString
-        monthResult.innerHTML = ageString
-        yearResult.innerHTML = ageString
+        dayResult.innerHTML = dayAgeString
+        monthResult.innerHTML = monthAgeString
+        yearResult.innerHTML = yearsAgeString
 
 
         daysResult.appendChild(dayResult)
